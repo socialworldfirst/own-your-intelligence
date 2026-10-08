@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Own Your Intelligence · WorldFirst Research</title>
+<meta name="description" content="Why application companies are starting to own their AI models instead of renting them, how they do it, where fintech already stands, and what it means for WorldFirst.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="images/logos/worldfirst.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { min-height: 100vh; }
+  img { max-width: 100%; display: block; }
+
+  :root {
+    --wf-red: #FF0051;
+    --wf-red-hover: #EB004B;
+    --wf-dark-purple: #13002D;
+    --wf-purple: #32006E;
+    --wf-grey: #484F56;
+    --wf-black: #1F2323;
+    --wf-light-grey: #ECEDEE;
+    --wf-white: #FFFFFF;
+    --pink-050: #FFF0F5;
+    --pink-100: #FCE4EC;
+    --lilac-100: #D7C7F8;
+    --neutral-050: #F9FAFD;
+    --neutral-150: #F2F2F2;
+    --neutral-300: #E8E8E8;
+    --neutral-400: #DADCDD;
+    --neutral-500: #A8AEB5;
+    --neutral-800: #74797D;
+    --shadow-sm: 0 1px 2px rgba(19, 0, 45, 0.05);
+    --shadow-md: 0 2px 10px rgba(19, 0, 45, 0.07);
+  }
+
+  body {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--wf-black);
+    background: var(--wf-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--wf-red); width: 0%; z-index: 100; transition: width 60ms linear; }
+
+  .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.9); backdrop-filter: saturate(180%) blur(12px); -webkit-backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid var(--wf-light-grey); }
+  .header-inner { max-width: 1232px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand-link { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--wf-black); flex-shrink: 0; }
+  .brand-link img { height: 24px; width: auto; }
+  .brand-link .pipe { width: 1px; height: 18px; background: var(--neutral-400); }
+  .brand-link .article-tag { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wf-grey); font-weight: 500; }
+  .site-nav { display: flex; gap: 24px; font-size: 14px; }
+  .site-nav a { color: var(--wf-grey); text-decoration: none; font-weight: 500; transition: color 150ms; }
+  .site-nav a:hover, .site-nav a.active { color: var(--wf-red); }
+  @media (max-width: 900px) { .site-nav { display: none; } }
+
+  .hero { max-width: 1232px; margin: 0 auto; padding: 104px 32px 72px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wf-red); margin-bottom: 28px; }
+  .eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--wf-red); }
+  .hero h1 { font-weight: 800; font-size: clamp(2.5rem, 5.6vw, 4.2rem); line-height: 1.0; letter-spacing: -1px; color: var(--wf-dark-purple); max-width: 18ch; margin-bottom: 28px; }
+  .hero h1 em { font-style: normal; color: var(--wf-red); }
+  .hero .dek { font-weight: 400; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.5; color: var(--wf-grey); max-width: 60ch; margin-bottom: 36px; }
+  .byline { display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--wf-grey); margin-bottom: 56px; flex-wrap: wrap; }
+  .byline .author { font-weight: 600; color: var(--wf-black); }
+  .byline .bar { width: 1px; height: 14px; background: var(--neutral-400); }
+  .brands-row { padding: 24px 0; border-top: 1px solid var(--wf-light-grey); border-bottom: 1px solid var(--wf-light-grey); display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .brands-row .label { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--wf-grey); font-weight: 600; }
+  .brands-icons { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+  .brand-chip { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--wf-black); }
+  .brand-chip img { width: 20px; height: 20px; border-radius: 4px; }
+
+  .article { max-width: 1232px; margin: 0 auto; padding: 0 32px 96px; display: grid; grid-template-columns: 220px 1fr; gap: 80px; }
+  @media (max-width: 1024px) { .article { grid-template-columns: 1fr; gap: 0; } }
+
+  .toc-aside { position: sticky; top: 88px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; padding-right: 16px; font-size: 14px; }
+  .toc-aside::-webkit-scrollbar { width: 4px; }
+  .toc-aside::-webkit-scrollbar-thumb { background: var(--neutral-400); border-radius: 2px; }
+  .toc-heading { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--wf-grey); font-weight: 600; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--wf-light-grey); }
+  .toc-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+  .toc-list a { display: block; padding: 6px 0 6px 12px; color: var(--wf-grey); text-decoration: none; border-left: 2px solid transparent; transition: all 150ms; line-height: 1.4; }
+  .toc-list a:hover { color: var(--wf-black); border-left-color: var(--neutral-400); }
+  .toc-list a.active { color: var(--wf-red); border-left-color: var(--wf-red); font-weight: 500; }
+  .toc-list .num { color: var(--wf-red); font-weight: 600; margin-right: 8px; font-size: 12px; }
+  @media (max-width: 1024px) { .toc-aside { display: none; } }
+
+  .main-content { min-width: 0; max-width: 740px; }
+  section { padding: 72px 0 32px; scroll-margin-top: 80px; }
+  section:first-of-type { padding-top: 32px; }
+  .section-anchor { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .section-num { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: var(--wf-red); }
+  .section-divider { flex: 1; height: 1px; background: var(--wf-light-grey); }
+  h2 { font-weight: 800; font-size: clamp(1.9rem, 3.6vw, 2.75rem); line-height: 1.1; letter-spacing: -1.5px; color: var(--wf-dark-purple); margin: 20px 0 24px; max-width: 22ch; }
+  h2 em { font-style: normal; color: var(--wf-red); }
+  h3 { font-weight: 700; font-size: clamp(1.35rem, 2.2vw, 1.7rem); line-height: 1.2; letter-spacing: -0.3px; color: var(--wf-dark-purple); margin: 56px 0 12px; }
+  h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wf-grey); margin: 32px 0 8px; }
+  h5 { font-size: 15px; font-weight: 600; color: var(--wf-black); margin: 20px 0 8px; }
+  p { margin-bottom: 20px; max-width: 68ch; }
+  .intro-p { font-size: 19px; font-weight: 500; color: var(--wf-black); line-height: 1.55; max-width: 62ch; margin-bottom: 24px; }
+  .fine { font-size: 14px; color: var(--wf-grey); }
+  strong { font-weight: 600; color: var(--wf-black); }
+  .red { color: var(--wf-red); }
+
+  a.inline-link { color: var(--wf-black); text-decoration: none; background-image: linear-gradient(transparent 64%, var(--pink-100) 64%); padding: 0 2px; transition: background-image 200ms; font-weight: 500; }
+  a.inline-link:hover { background-image: linear-gradient(transparent 0%, var(--pink-100) 0%); }
+  a.inline-link::after { content: '↗'; display: inline-block; margin-left: 2px; font-size: 0.8em; color: var(--wf-red); }
+
+  .callout { background: var(--pink-050); border-radius: 12px; padding: 22px 26px; margin: 32px 0; border-left: 3px solid var(--wf-red); }
+  .callout .callout-label { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wf-red); font-weight: 600; margin-bottom: 8px; display: block; }
+  .callout p { margin-bottom: 0; font-size: 16px; }
+  .callout p:not(:last-child) { margin-bottom: 12px; }
+  .callout.dark { background: var(--wf-dark-purple); color: var(--wf-white); border-left-color: var(--wf-red); }
+  .callout.dark p, .callout.dark strong { color: var(--wf-white); }
+
+  .pull { font-weight: 500; font-size: 23px; line-height: 1.35; color: var(--wf-dark-purple); max-width: 50ch; padding: 20px 0 20px 28px; margin: 36px 0; border-left: 3px solid var(--wf-red); letter-spacing: -0.3px; }
+  .pull cite { display: block; margin-top: 14px; font-style: normal; font-size: 13px; color: var(--wf-grey); font-weight: 500; }
+
+  .evidence { background: var(--wf-white); border: 1px solid var(--wf-light-grey); border-radius: 12px; padding: 24px; margin: 32px 0; box-shadow: var(--shadow-sm); }
+  .evidence-head { display: flex; align-items: center; gap: 10px; padding-bottom: 14px; margin-bottom: 16px; border-bottom: 1px solid var(--wf-light-grey); }
+  .evidence-head img { width: 22px; height: 22px; border-radius: 4px; }
+  .evidence-head .label { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wf-red); font-weight: 600; }
+  .evidence-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .evidence-list li { font-size: 15px; line-height: 1.45; color: var(--wf-black); }
+  .evidence-list a { color: var(--wf-black); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--pink-100); transition: border-color 150ms, color 150ms; }
+  .evidence-list a:hover { border-bottom-color: var(--wf-red); color: var(--wf-red); }
+  .evidence-list a .ext { color: var(--wf-red); margin-left: 2px; font-size: 0.88em; }
+  .evidence-list li .note { display: block; font-size: 13px; color: var(--wf-grey); margin-top: 3px; line-height: 1.4; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 24px; padding: 24px 0; border-top: 1px solid var(--wf-light-grey); border-bottom: 1px solid var(--wf-light-grey); margin: 24px 0; }
+  .stat .stat-num { font-weight: 800; font-size: 36px; color: var(--wf-red); line-height: 1; letter-spacing: -1px; font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+  .stat .stat-num .unit { font-size: 0.6em; font-weight: 600; }
+  .stat .stat-lbl { font-size: 13px; color: var(--wf-grey); line-height: 1.4; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin: 32px 0; padding: 24px; background: var(--wf-white); border: 1px solid var(--wf-light-grey); border-radius: 12px; }
+  @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; padding: 20px; gap: 24px; } }
+  .two-col h5 { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; margin: 0 0 10px; color: var(--wf-black); }
+  .two-col h5 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--wf-red); }
+  .two-col h5.alt .dot { background: var(--wf-dark-purple); }
+  .two-col p { font-size: 15px; line-height: 1.55; margin-bottom: 8px; }
+
+  .clean-list { list-style: none; margin: 20px 0; }
+  .clean-list li { padding: 10px 0 10px 24px; position: relative; line-height: 1.55; max-width: 68ch; }
+  .clean-list li::before { content: ''; position: absolute; left: 0; top: 21px; width: 12px; height: 2px; background: var(--wf-red); }
+  .clean-list li strong { color: var(--wf-black); display: block; margin-bottom: 2px; }
+
+  ol.steps { list-style: none; counter-reset: s; margin: 24px 0; }
+  ol.steps li { counter-increment: s; position: relative; padding: 18px 0 18px 56px; border-top: 1px solid var(--wf-light-grey); max-width: 68ch; }
+  ol.steps li:last-child { border-bottom: 1px solid var(--wf-light-grey); }
+  ol.steps li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 18px; font-weight: 800; font-size: 20px; color: var(--wf-red); letter-spacing: -0.5px; }
+  ol.steps li strong { display: block; margin-bottom: 4px; font-size: 16px; }
+  ol.steps li p { margin: 0; font-size: 15px; color: var(--wf-grey); }
+
+  table.grid { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 14px; }
+  table.grid th { text-align: left; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wf-grey); font-weight: 600; padding: 10px 12px; border-bottom: 2px solid var(--wf-dark-purple); vertical-align: bottom; }
+  table.grid td { padding: 12px; border-bottom: 1px solid var(--wf-light-grey); vertical-align: top; line-height: 1.45; }
+  table.grid td:first-child { font-weight: 600; color: var(--wf-black); white-space: nowrap; }
+  table.grid td img { display: inline-block; width: 16px; height: 16px; border-radius: 3px; vertical-align: -3px; margin-right: 6px; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 40px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }
+  .pill.own { background: var(--wf-red); color: var(--wf-white); }
+  .pill.rent { background: var(--wf-light-grey); color: var(--wf-black); }
+  .pill.hybrid { background: var(--wf-dark-purple); color: var(--wf-white); }
+  .pill.have { background: var(--pink-100); color: var(--wf-red); }
+  .break-out { margin-left: -24px; margin-right: -24px; }
+  @media (max-width: 1024px) { .break-out { margin-left: 0; margin-right: 0; } .table-wrap { overflow-x: auto; } }
+  .table-wrap { overflow-x: auto; }
+
+  /* stack diagram */
+  .stack { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+  @media (max-width: 680px) { .stack { grid-template-columns: 1fr; } }
+  .stack-col { border: 1px solid var(--wf-light-grey); border-radius: 12px; overflow: hidden; background: var(--wf-white); }
+  .stack-col .sc-head { padding: 12px 16px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--wf-white); background: var(--wf-dark-purple); }
+  .stack-col.prod .sc-head { background: var(--wf-red); }
+  .stack-layer { padding: 14px 16px; border-top: 1px solid var(--wf-light-grey); }
+  .stack-layer .ln { font-weight: 600; font-size: 15px; color: var(--wf-black); }
+  .stack-layer .ld { font-size: 13px; color: var(--wf-grey); line-height: 1.4; margin-top: 2px; }
+  .stack-layer .lo { font-size: 12px; color: var(--wf-red); font-weight: 500; margin-top: 4px; }
+
+  /* cards */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 24px 0; }
+  @media (max-width: 680px) { .cards { grid-template-columns: 1fr; } }
+  .card { background: var(--wf-white); border: 1px solid var(--wf-light-grey); border-radius: 12px; padding: 18px 20px; }
+  .card .c-num { font-size: 11px; color: var(--wf-red); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  .card h5 { font-size: 16px; margin: 0 0 8px; color: var(--wf-dark-purple); }
+  .card p { font-size: 14px; line-height: 1.5; color: var(--wf-grey); margin: 0 0 6px; }
+  .card .ex { font-size: 12.5px; color: var(--neutral-800); margin-top: 6px; }
+  .card.wf { border-color: var(--wf-red); border-left-width: 3px; background: var(--pink-050); }
+
+  /* case files */
+  .case { margin: 56px 0 24px; padding-top: 32px; border-top: 1px solid var(--wf-light-grey); scroll-margin-top: 80px; }
+  .case-head { display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; margin-bottom: 8px; }
+  .case-logo { width: 44px; height: 44px; border-radius: 8px; background: var(--wf-white); border: 1px solid var(--wf-light-grey); padding: 7px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); }
+  .case-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; }
+  .case-num { font-size: 12px; letter-spacing: 0.1em; color: var(--wf-red); font-weight: 600; }
+  .case-title { font-weight: 700; font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.15; letter-spacing: -0.4px; color: var(--wf-dark-purple); margin: 2px 0 0; }
+  .case-dek { font-size: 17px; color: var(--wf-grey); line-height: 1.5; margin: 12px 0 20px; max-width: 58ch; }
+  .case-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 40px; font-size: 12px; font-weight: 500; background: var(--pink-050); color: var(--wf-red); }
+  .tag.neutral { background: var(--neutral-150); color: var(--wf-black); }
+
+  /* timeline */
+  .timeline { list-style: none; margin: 24px 0; border-left: 2px solid var(--wf-light-grey); padding-left: 24px; }
+  .timeline li { position: relative; padding: 0 0 20px; font-size: 15px; line-height: 1.5; }
+  .timeline li::before { content: ''; position: absolute; left: -31px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--wf-red); border: 2px solid var(--wf-white); box-shadow: 0 0 0 2px var(--wf-red); }
+  .timeline li .tdate { display: block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wf-grey); font-weight: 600; margin-bottom: 2px; }
+
+  /* fit bars */
+  .fit-rows { margin: 20px 0; }
+  .fit-row { display: grid; grid-template-columns: 220px 1fr 48px; gap: 14px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--wf-light-grey); font-size: 14px; }
+  @media (max-width: 680px) { .fit-row { grid-template-columns: 130px 1fr 40px; font-size: 13px; } }
+  .fit-row .fl { color: var(--wf-black); font-weight: 500; }
+  .fit-row .fb { height: 8px; background: var(--neutral-150); border-radius: 4px; overflow: hidden; }
+  .fit-row .ff { height: 100%; background: var(--wf-red); border-radius: 4px; }
+  .fit-row .ff.p { background: var(--wf-dark-purple); }
+  .fit-row .fv { text-align: right; font-weight: 600; color: var(--wf-grey); font-size: 13px; }
+  .fit-legend { display: flex; gap: 20px; font-size: 12px; color: var(--wf-grey); margin-top: 8px; }
+  .fit-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; background: var(--wf-red); }
+  .fit-legend span.p::before { background: var(--wf-dark-purple); }
+
+  .sources-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px; margin: 24px 0; }
+  @media (max-width: 680px) { .sources-grid { grid-template-columns: 1fr; } }
+  .sources-group h4 { font-size: 15px; font-weight: 700; letter-spacing: 0; color: var(--wf-dark-purple); text-transform: none; margin: 0 0 12px; }
+  .sources-group ul { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; }
+  .sources-group a { color: var(--wf-black); text-decoration: none; border-bottom: 1px solid var(--wf-light-grey); transition: border-color 150ms, color 150ms; }
+  .sources-group a:hover { color: var(--wf-red); border-bottom-color: var(--wf-red); }
+  .sources-group a .ext { color: var(--wf-red); margin-left: 2px; font-size: 0.88em; }
+
+  .site-footer { max-width: 1232px; margin: 0 auto; padding: 40px 32px; border-top: 1px solid var(--wf-light-grey); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: 13px; color: var(--wf-grey); }
+  .site-footer img { height: 22px; }
+  .site-footer .left { display: flex; align-items: center; gap: 14px; }
+  .site-footer a { color: var(--wf-grey); text-decoration: none; font-weight: 500; }
+  .site-footer a:hover { color: var(--wf-red); }
+
+  @media print {
+    .site-header, .toc-aside, .site-footer, .progress-bar { display: none !important; }
+    body { font-size: 11pt; }
+    .article { grid-template-columns: 1fr; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress-bar"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="brand-link">
+      <img src="images/wf_logo.svg" alt="WorldFirst">
+      <span class="pipe"></span>
+      <span class="article-tag">Research · Oct 2026</span>
+    </a>
+    <nav class="site-nav">
+      <a href="#thesis">Thesis</a>
+      <a href="#why-now">Why now</a>
+      <a href="#how">How</a>
+      <a href="#cases">Cases</a>
+      <a href="#fintech">Fintech</a>
+      <a href="#ant">Ant</a>
+      <a href="#worldfirst">WorldFirst</a>
+      <a href="#legibility">Legibility</a>
+      <a href="#closing">Closing</a>
+    </nav>
+  </div>
+</header>
+
+<div id="top"></div>
+<section class="hero">
+  <span class="eyebrow">Research note · Sovereign AI</span>
+  <h1>Own your <em>intelligence.</em> What it means, who is doing it, and where WorldFirst stands.</h1>
+  <p class="dek">In August 2026 Sequoia told its portfolio that the race for the AI application layer has become a race for the intelligence layer itself. This note unpacks the claim, traces the forces behind it, maps who in fintech has already made the move, and works out what it means for a cross-border payments brand owned by Ant International.</p>
+  <div class="byline">
+    <span>By</span>
+    <span class="author">Steven Chen</span>
+    <span class="bar"></span>
+    <span>8 October 2026</span>
+    <span class="bar"></span>
+    <span>~30 min read</span>
+    <span class="bar"></span>
+    <span>Internal, not for distribution</span>
+  </div>
+  <div class="brands-row">
+    <span class="label">Companies examined</span>
+    <div class="brands-icons">
+      <span class="brand-chip"><img src="images/logos/sequoiacap.png" alt="">Sequoia</span>
+      <span class="brand-chip"><img src="images/logos/harvey.png" alt="">Harvey</span>
+      <span class="brand-chip"><img src="images/logos/cursor.png" alt="">Cursor</span>
+      <span class="brand-chip"><img src="images/logos/openevidence.png" alt="">OpenEvidence</span>
+      <span class="brand-chip"><img src="images/logos/ramp.png" alt="">Ramp</span>
+      <span class="brand-chip"><img src="images/logos/stripe.png" alt="">Stripe</span>
+      <span class="brand-chip"><img src="images/logos/revolut.png" alt="">Revolut</span>
+      <span class="brand-chip"><img src="images/logos/visa.png" alt="">Visa</span>
+      <span class="brand-chip"><img src="images/logos/mastercard.png" alt="">Mastercard</span>
+      <span class="brand-chip"><img src="images/logos/nubank.png" alt="">Nubank</span>
+      <span class="brand-chip"><img src="images/logos/plaid.png" alt="">Plaid</span>
+      <span class="brand-chip"><img src="images/logos/airwallex.png" alt="">Airwallex</span>
+      <span class="brand-chip"><img src="images/logos/ant-intl.png" alt="">Ant International</span>
+    </div>
+  </div>
+</section>
+
+<div class="article">
+
+  <aside class="toc-aside" id="toc">
+    <div class="toc-heading">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#scope"><span class="num">00</span>Scope</a></li>
+      <li><a href="#thesis"><span class="num">§ 1</span>The thesis</a></li>
+      <li><a href="#why-now"><span class="num">§ 2</span>Why now</a></li>
+      <li><a href="#how"><span class="num">§ 3</span>How it is done</a></li>
+      <li><a href="#cases"><span class="num">§ 4</span>Case files</a></li>
+      <li><a href="#fintech"><span class="num">§ 5</span>Fintech is already there</a></li>
+      <li><a href="#ant"><span class="num">§ 6</span>Ant International's position</a></li>
+      <li><a href="#worldfirst"><span class="num">§ 7</span>Applying it to WorldFirst</a></li>
+      <li><a href="#legibility"><span class="num">§ 8</span>Legibility</a></li>
+      <li><a href="#risks"><span class="num">§ 9</span>Risks and counter-arguments</a></li>
+      <li><a href="#closing"><span class="num">·</span>Closing</a></li>
+      <li><a href="#sources"><span class="num">·</span>Sources</a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+
+    <section id="scope">
+      <div class="section-anchor"><span class="section-num">00</span><span class="section-divider"></span></div>
+      <h2>Scope.</h2>
+      <p class="intro-p">This started as a question about a 17-minute talk: is "own your intelligence" a content idea? It is not. Content and thought leadership are a downstream result of it. So this note treats the subject as what it is, a strategic and technical shift in how software companies build their products, and only then asks what it means for WorldFirst's marketing.</p>
+      <div class="two-col">
+        <div>
+          <h5><span class="dot"></span>What this is</h5>
+          <p>A synthesis of Sequoia's August 2026 thesis, the market events that produced it, the technical playbook companies follow, and a scan of how far fintech and Ant International have already gone. It ends with an own-versus-rent map for WorldFirst and a legibility plan.</p>
+        </div>
+        <div>
+          <h5 class="alt"><span class="dot"></span>What this isn't</h5>
+          <p>A proposal to build a WorldFirst AI lab. Most of the intelligence WorldFirst would need already exists inside Ant International. The question is which parts to use, which to rent, and how to make the work visible.</p>
+        </div>
+      </div>
+      <p class="fine">Method: primary sources where they exist (Sequoia's article and talk, Harvey and Fireworks engineering posts, the arXiv papers for Revolut and Visa, Ant International's September 2026 release), plus press coverage. Where a number is company-reported and unverified, the note says so.</p>
+    </section>
+
+    <section id="thesis">
+      <div class="section-anchor"><span class="section-num">§ 1</span><span class="section-divider"></span></div>
+      <h2>The thesis: not your weights, <em>not your product.</em></h2>
+      <p class="intro-p">Sonya Huang's definition is precise. A sovereign is an independent state with total self-governance. Sovereign AI is a company owning its own intelligence, without external dependencies, down to the model weights.</p>
+      <p>The nuance matters as much as the slogan. Sequoia is not telling anyone to stop using Opus or GPT. For coding agents, desktop work and frontier-level APIs, the closed labs are the right choice. What Sequoia observed is that more and more of its portfolio companies are building their own AI capability for parts of their product, and vertically integrating towards owning the weights that drive those parts.</p>
+      <div class="pull">"Companies want to own their intelligence. They want to own, not rent, their weights. Intelligence is too core, too fundamental a property to just outsource."<cite>Sonya Huang, Sequoia Capital, Own Your Intelligence event, August 2026</cite></div>
+
+      <h3>The four reasons companies move</h3>
+      <div class="cards">
+        <div class="card"><span class="c-num">01 · Cost</span><h5>Inference scales with success</h5><p>The more successful an AI product, the higher its AI cost of goods. For low, zero or negative margin companies, owning the model is a must-have. The most advanced AI deployers were the first to move.</p></div>
+        <div class="card"><span class="c-num">02 · Speed</span><h5>Small distilled beats large general</h5><p>In coding autocomplete and cybersecurity, latency is a P0. A small custom model wins because speed is the product.</p></div>
+        <div class="card"><span class="c-num">03 · Performance</span><h5>New for 2026</h5><p>A year ago you chose open weights when you did not care about performance. Now open models post-trained on your data can outperform closed ones on your domain.</p></div>
+        <div class="card"><span class="c-num">04 · Destiny</span><h5>Independent legs to stand on</h5><p>The labs have been good partners. Companies still want a path that does not depend on another company's roadmap, pricing or terms.</p></div>
+      </div>
+
+      <h3>The battleground moved</h3>
+      <p>Sequoia's earlier framing was "the race for the application layer": foundation labs reaching down into products, application companies reaching up from the user. Huang's update is that the fight is no longer about who controls the UI, the workflow or the go-to-market. It is about who can own and shape the intelligence inside the product. The product <em>is</em> the intelligence.</p>
+      <p>Her sharpest line is that the hottest new labs are not labs at all. They are the applied research teams inside application companies: Harvey, Factory, Glean, OpenEvidence, Semgrep, Ramp. "The application companies are the newest neo labs."</p>
+      <div class="callout"><span class="callout-label">Centralised vs decentralised</span><p>The frame underneath the whole talk is political. One future has a single all-powerful model powering more and more of world GDP as a black box, absorbing every data flywheel. The other has the world building on a solid open core, with every company shaping its own intelligence on its own data, industry and taste. Sequoia is explicitly betting on the second.</p></div>
+
+      <aside class="evidence">
+        <div class="evidence-head"><img src="images/logos/sequoiacap.png" alt=""><span class="label">Evidence and sources</span></div>
+        <ul class="evidence-list">
+          <li><a href="https://sequoiacap.com/article/own-your-intelligence-a-how-to-guide" target="_blank" rel="noopener">Own Your Intelligence: A How-to Guide for Sovereign AI <span class="ext">↗</span></a><span class="note">Sequoia, 19 Aug 2026. The written version of the thesis plus the technical roadmap.</span></li>
+          <li><a href="https://www.youtube.com/watch?v=bMMv0bZzONg" target="_blank" rel="noopener">How Companies Are Building Their Own Intelligence (talk) <span class="ext">↗</span></a><span class="note">Opening remarks, uploaded 11 Aug 2026. Transcript read in full for this note.</span></li>
+          <li><a href="https://x.com/sonyatweetybird/status/2087223288649138668" target="_blank" rel="noopener">Huang on X: "last year a cost rationalisation, now existential" <span class="ext">↗</span></a><span class="note">The one-paragraph version of the shift.</span></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section id="why-now">
+      <div class="section-anchor"><span class="section-num">§ 2</span><span class="section-divider"></span></div>
+      <h2>Why now: three forces <em>converged in 2026.</em></h2>
+      <p class="intro-p">Nothing in the thesis is conceptually new. Fintechs have owned their fraud models for a decade. What changed in the first half of 2026 is that three separate things lined up at once: open weights reached the frontier, the post-training supply chain matured, and the politics of model ownership went mainstream.</p>
+
+      <h3>Force 1: open weights caught up</h3>
+      <p>Fine-tuning used to be a treadmill. Every frontier release erased the gains you had made on the previous base. That broke in 2026 because the open-weight baseline moved to within touching distance of the closed frontier, and the strongest open models are Chinese.</p>
+      <ul class="timeline">
+        <li><span class="tdate">13 Feb 2026</span>Ant Group open-sources Ring-2.5-1T, a trillion-parameter reasoning model.</li>
+        <li><span class="tdate">30 Apr 2026</span>Ant Group open-sources Ling-2.6-1T, its trillion-parameter flagship, weights on Hugging Face and ModelScope under MIT.</li>
+        <li><span class="tdate">13 Jun 2026</span>Zhipu releases GLM-5.2, 753B parameters, MIT licence. It fits on a single 8-GPU node and runs at roughly 168 tokens a second.</li>
+        <li><span class="tdate">16 to 27 Jul 2026</span>Moonshot launches Kimi K3, a 2.8-trillion-parameter model with native vision. Weights follow on Hugging Face eleven days later. It becomes the base for Harvey's Tenet.</li>
+        <li><span class="tdate">10 Sep 2026</span>Ant Group releases Ling-3.0-flash-VL and Ling-3.0-flash-Fin, a finance-tuned model for investment research and regulatory reporting.</li>
+      </ul>
+      <p>Benchmarks are messy, as every lab reports its own suite. The point is directional: an application company can now start from a base that is close to frontier and malleable, rather than from a base that is cheap and clearly worse.</p>
+
+      <h3>Force 2: the post-training supply chain matured</h3>
+      <p>Owning intelligence used to mean hiring a research lab. In 2026 it means assembling vendors. Sequoia's event was structured around exactly that supply chain: Fireworks for post-training and inference, LangChain for harnesses and evals, Mercor for RL environments and expert data, Trajectory for online learning. Harvey post-trained Kimi K3 into Tenet with a research team of seven, by renting the training infrastructure rather than building it.</p>
+
+      <h3>Force 3: the politics went mainstream</h3>
+      <p>In six weeks over the summer the argument moved from VC blogs to CEOs and Washington.</p>
+      <ul class="clean-list">
+        <li><strong>1 July and 3 August. Alex Karp, Palantir.</strong> Called the token-based pricing model of the frontier labs "completely wrong" and accused them of "trying to drug addict us". Palantir's sovereignty manifesto carries the line "controlling your weights is controlling your fate".</li>
+        <li><strong>Mid July. Satya Nadella, Microsoft.</strong> Argued that buying frontier intelligence means paying twice: once in money, and again in the proprietary knowledge you must reveal to make it useful. Every human correction of a model's answer encodes institutional judgement, and a provider that learns from usage ends up with a detailed picture of how your business runs.</li>
+        <li><strong>24 July. The open-weights letter.</strong> Microsoft, Nvidia, Meta, IBM, Mistral, Hugging Face, Andreessen Horowitz and 18 others asked US lawmakers to avoid "premature restrictions on downloadable AI models", four days after reports that the administration was reviving a push to ban Chinese models. Jensen Huang's first-ever post on X shared it. Anthropic did not sign. By early August the count reportedly passed 270 organisations.</li>
+        <li><strong>Early 2026. The application-layer scare.</strong> Anthropic's Claude Cowork launches helped trigger a reported $285 billion sell-off in enterprise software stocks as investors repriced companies whose core function overlapped with what the lab's own agent could do. This is the "controlling your destiny" reason, priced by the market.</li>
+      </ul>
+
+      <h3>The economics underneath</h3>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-num">45<span class="unit">%</span></div><div class="stat-lbl">Median AI product gross margin in 2025 per ICONIQ survey data; 2026 projected at 52 to 53%. Software used to be 80%.</div></div>
+        <div class="stat"><div class="stat-num">~25<span class="unit">%</span></div><div class="stat-lbl">Gross margin of Bessemer's fastest-growing AI "supernovas" at ~$125M ARR, per secondary reporting.</div></div>
+        <div class="stat"><div class="stat-num">30<span class="unit">%</span></div><div class="stat-lbl">Internal LLM cost reduction Ramp attributes to its Router, routing 2.75 trillion tokens a month.</div></div>
+        <div class="stat"><div class="stat-num">57<span class="unit">%</span></div><div class="stat-lbl">Executives who say replacing a core AI model would need significant decoupling or a full rebuild (IBM, cited by CIO).</div></div>
+      </div>
+      <p class="fine">All margin figures are from secondary write-ups of ICONIQ and Bessemer surveys and should be checked against the originals before reuse in anything external.</p>
+
+      <aside class="evidence">
+        <div class="evidence-head"><img src="images/logos/nvidia.png" alt=""><span class="label">Evidence and sources</span></div>
+        <ul class="evidence-list">
+          <li><a href="https://www.microsoft.com/en-us/corporate-responsibility/wp-content/uploads/2026/07/open-weight-models-letter_July26.pdf" target="_blank" rel="noopener">Open Weights and American AI Leadership, 24 July 2026 <span class="ext">↗</span></a><span class="note">The letter itself, hosted by Microsoft.</span></li>
+          <li><a href="https://www.cnbc.com/2026/07/24/nvidia-microsoft-meta-open-weight-ai-models.html" target="_blank" rel="noopener">CNBC: Nvidia, Microsoft, Meta warn against premature restrictions <span class="ext">↗</span></a></li>
+          <li><a href="https://www.cnbc.com/2026/08/03/palantir-karp-open-ai-anthropic-open-weight.html" target="_blank" rel="noopener">CNBC: Karp renews attacks on frontier labs <span class="ext">↗</span></a></li>
+          <li><a href="https://www.thestateofai.com/news/nadella-warns-enterprises-pay-twice-for-ai" target="_blank" rel="noopener">Nadella: enterprises pay twice for AI <span class="ext">↗</span></a><span class="note">Secondary reporting; original post not retrieved.</span></li>
+          <li><a href="https://www.marktechpost.com/2026/07/18/kimi-k3-vs-deepseek-v4-pro-vs-glm-5-2-open-trillion-scale-moe-models-compared-on-benchmarks-license-and-serving-cost/" target="_blank" rel="noopener">Kimi K3 vs DeepSeek V4 Pro vs GLM-5.2 compared <span class="ext">↗</span></a></li>
+          <li><a href="https://www.llm-releases.com/labs/ant-group" target="_blank" rel="noopener">Ant Group (inclusionAI) model release tracker <span class="ext">↗</span></a><span class="note">Aggregator; licence and weight status should be confirmed on Hugging Face.</span></li>
+          <li><a href="https://venturebeat.com/technology/cursors-new-coding-model-composer-2-is-here-it-beats-claude-opus-4-6-but" target="_blank" rel="noopener">VentureBeat on the Cowork-driven software sell-off <span class="ext">↗</span></a><span class="note">Single-source figure.</span></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section id="how">
+      <div class="section-anchor"><span class="section-num">§ 3</span><span class="section-divider"></span></div>
+      <h2>How it is done: <em>the playbook.</em></h2>
+      <p class="intro-p">Sequoia's roadmap has four steps: strategy, team, legibility, technical roadmap. Sovereignty is not binary. The first job is to draw the line between what you own and what you rent.</p>
+
+      <h3>Step 1: own versus rent, by workload</h3>
+      <p>Four factors decide each workload. How big is this cost line in overall COGS. Is latency a P0. Can tuning on your own data beat the frontier here. How proprietary is the data you would feed in.</p>
+      <div class="table-wrap">
+      <table class="grid">
+        <thead><tr><th>Workload</th><th>Cost</th><th>Latency</th><th>Own data edge</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Coding agents</td><td>Medium</td><td>Not P0</td><td>Low</td><td><span class="pill rent">Rent</span> strong out-of-box performance wins</td></tr>
+          <tr><td>Tab autocomplete</td><td>High (very frequent calls)</td><td>P0</td><td>Medium</td><td><span class="pill own">Own</span> most now run on sovereign models</td></tr>
+          <tr><td>Cybersecurity agents</td><td>Medium</td><td>P0</td><td>High</td><td><span class="pill own">Own</span> speed plus bespoke post-training</td></tr>
+          <tr><td>Bio and medicine</td><td>Medium</td><td>Not P0</td><td>Very high</td><td><span class="pill own">Own</span> proprietary data is the asset</td></tr>
+          <tr><td>Desktop and office work</td><td>Low</td><td>Not P0</td><td>Low</td><td><span class="pill rent">Rent</span> frontier agents</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Step 2: the team</h3>
+      <p>Do not shoehorn this into the existing AI platform team. Platform teams service other teams; a labs team plays offence. Harvey published a substantial body of research with seven people. Two leader profiles both work: the research type (Apple, Google Brain) and the engineering type (Microsoft, Ramp). Start small, start from scratch, consider branding it as a lab.</p>
+
+      <h3>Step 3: legibility</h3>
+      <p>This is the step Huang says gets glossed over, and the one closest to marketing. Every buyer is choosing an AI champion right now. They hear the same pitch from every vendor and need to tell who is sophisticated enough to take them to the promised land. Increasingly the tell is published research. Being legible means excellent technical marketing, a separately branded lab or research group, and research published with taste. Section 8 takes this up for WorldFirst.</p>
+
+      <h3>Step 4: the technical roadmap</h3>
+      <ol class="steps">
+        <li><strong>Evals first.</strong><p>An eval is a set of tasks, each with a prompt, context and a grader. It replaces gut checks with measurement. Harvey's Legal Agent Benchmark has 1,200 tasks across 24 practice areas graded against 75,000 expert-written rubric criteria. Gabe Pereyra's rule: "If you don't have a good benchmark, you can't train models." Build the eval before deciding whether to own a model.</p></li>
+        <li><strong>Harness and context engineering.</strong><p>An agent is model plus context plus harness. The harness routes, retrieves, calls tools, holds memory, falls back and leaves traces. Harrison Chase: its main job is to bring context to the model at the right point in time. A good harness lets you swap models under the same eval.</p></li>
+        <li><strong>Post-training, lightest method first.</strong><p>Lin Qiao's decision ladder. Missing facts: use context or retrieval, not training. Wrong format or behaviour: supervised fine-tuning. Product taste: preference tuning. Specialised task improvement: reinforcement learning. Too slow or expensive: distillation. Pick the lightest method that moves your eval, then measure quality, latency and cost.</p></li>
+        <li><strong>Online learning.</strong><p>Models keep getting smarter but every session starts fresh. What is missing is experience, not intelligence. Record trajectories: context seen, tools called, answer produced, what the user edited or retried. Failed tasks become evals, missing information becomes context, bad tool responses become harness fixes. The intelligence improves with every customer interaction.</p></li>
+      </ol>
+
+      <h3>The stack: closed versus owned</h3>
+      <div class="stack">
+        <div class="stack-col prod">
+          <div class="sc-head">Production stack · user-facing intelligence</div>
+          <div class="stack-layer"><div class="ln">Model</div><div class="ld">Closed: Opus, GPT via API.</div><div class="lo">Owned: open base (Kimi K3, GLM 5.2, Ling) plus heavy post-training</div></div>
+          <div class="stack-layer"><div class="ln">Harness</div><div class="ld">Closed: Claude Code, Codex out of the box.</div><div class="lo">Owned: open harness you configure (logic, tools, routing)</div></div>
+          <div class="stack-layer"><div class="ln">Context</div><div class="ld">Vector DB, enterprise knowledge graph, MCP connectors, memory.</div><div class="lo">Owned either way; this is where your data lives</div></div>
+        </div>
+        <div class="stack-col">
+          <div class="sc-head">Development stack · how it gets good</div>
+          <div class="stack-layer"><div class="ln">Evals</div><div class="ld">Closed: light, mostly prompt checks.</div><div class="lo">Owned: proprietary benchmark, drift monitoring in production</div></div>
+          <div class="stack-layer"><div class="ln">Data</div><div class="ld">Closed: not needed.</div><div class="lo">Owned: expert trajectories, synthetic data, RL environments</div></div>
+          <div class="stack-layer"><div class="ln">Online learning</div><div class="ld">Closed: impossible, the weights are not yours.</div><div class="lo">Owned: production feedback loop into the model</div></div>
+        </div>
+      </div>
+      <p>Huang's summary: the closed stack has a higher floor and a lower ceiling. The owned stack has a lower floor and a higher ceiling, and opening it is "like opening Pandora's box", because the clean API call becomes a training operation.</p>
+    </section>
+
+    <section id="cases">
+      <div class="section-anchor"><span class="section-num">§ 4</span><span class="section-divider"></span></div>
+      <h2>Case files: who has <em>actually done it.</em></h2>
+      <p class="intro-p">Four application companies, four different reasons, one common pattern: none of them pre-trained from scratch. They built evals, picked an open base and post-trained.</p>
+
+      <article class="case" id="case-harvey">
+        <div class="case-head">
+          <div class="case-logo"><img src="images/logos/harvey.png" alt="Harvey"></div>
+          <div><div class="case-num">Case 01 · Legal · Performance and destiny</div><h3 class="case-title">Harvey: eval first, then a model called Tenet</h3></div>
+        </div>
+        <p class="case-dek">The reference case for Sequoia's whole argument, and the one whose numbers are most open.</p>
+        <div class="case-tags"><span class="tag">Base: Kimi K3</span><span class="tag">Async RL via Fireworks</span><span class="tag neutral">Team of 7</span><span class="tag neutral">$15.5B valuation</span></div>
+        <p>Harvey did the eval before the model. In May 2026 it open-sourced LAB, the Legal Agent Benchmark, with no leaderboard, so it could not be accused of grading its own homework. In August it released Tenet as a research preview: a Kimi K3 base post-trained with asynchronous reinforcement learning on synthetic, public legal and attorney-labelled data, with no customer data used.</p>
+        <p>Results on its own benchmark: all-pass rate on LAB rose from 10.8% to 19.7% over base K3. On benchmarks it was not trained on, Mercor's Apex Agents corporate-law set went from 58.8% to 74.0% and Crosby's Redline Bench from 49.3% to 55.5%. Cost per LAB task was flat, $5.92 against $5.62 for the base, while completing nearly twice as many tasks. In September Harvey raised $550M at $15.5B "to help legal teams own their intelligence".</p>
+        <div class="callout"><span class="callout-label">What to copy</span><p>The sequence. Benchmark published openly, then a model measured against it, then capital raised on the story. The research was the marketing.</p></div>
+        <aside class="evidence">
+          <div class="evidence-head"><img src="images/logos/fireworks.png" alt=""><span class="label">Evidence and sources</span></div>
+          <ul class="evidence-list">
+            <li><a href="https://www.harvey.ai/blog/post-training-update-harvey-tenet" target="_blank" rel="noopener">Harvey Tenet research preview <span class="ext">↗</span></a></li>
+            <li><a href="https://fireworks.ai/blog/post-training-kimi-k3-with-harvey-for-long-horizon-legal-work" target="_blank" rel="noopener">Fireworks: post-training Kimi K3 with Harvey <span class="ext">↗</span></a><span class="note">Source of the cost-per-task and benchmark deltas.</span></li>
+            <li><a href="https://www.artificiallawyer.com/2026/05/06/harvey-launches-legal-agent-bench/" target="_blank" rel="noopener">Harvey launches Legal Agent Bench <span class="ext">↗</span></a></li>
+            <li><a href="https://www.harvey.ai/blog/harvey-raises-dollar550m-at-a-dollar155b-valuation-to-help-legal-teams-own-their-intelligence" target="_blank" rel="noopener">Harvey raises $550M at $15.5B <span class="ext">↗</span></a></li>
+          </ul>
+        </aside>
+      </article>
+
+      <article class="case" id="case-cursor">
+        <div class="case-head">
+          <div class="case-logo"><img src="images/logos/cursor.png" alt="Cursor"></div>
+          <div><div class="case-num">Case 02 · Coding · Speed and cost</div><h3 class="case-title">Cursor: an editor that became a lab</h3></div>
+        </div>
+        <p class="case-dek">The clearest example of an application company shipping its own frontier-adjacent model, and of why disclosure matters.</p>
+        <div class="case-tags"><span class="tag">Base: Kimi K2.5</span><span class="tag">Composer 1 to 2.5 in seven months</span></div>
+        <p>Cursor shipped Composer in October 2025, then 1.5, 2 and 2.5 by May 2026. Composer 2 was built on a Kimi K2.5 base. Cursor did not say so at launch; users on X worked it out in the first week and a Cursor executive confirmed, noting that only about a quarter of the compute in the final model came from the base. The reason to own was the economics of autocomplete: calls so frequent that latency and per-token cost dominate, exactly the Sequoia "speed" case.</p>
+        <aside class="evidence">
+          <div class="evidence-head"><img src="images/logos/cursor.png" alt=""><span class="label">Evidence and sources</span></div>
+          <ul class="evidence-list">
+            <li><a href="https://venturebeat.com/technology/cursors-new-coding-model-composer-2-is-here-it-beats-claude-opus-4-6-but" target="_blank" rel="noopener">VentureBeat: Composer 2 and the Kimi base <span class="ext">↗</span></a></li>
+            <li><a href="https://cursor.com/docs/models/cursor-composer-2-5" target="_blank" rel="noopener">Cursor docs: Composer 2.5 <span class="ext">↗</span></a></li>
+          </ul>
+        </aside>
+      </article>
+
+      <article class="case" id="case-openevidence">
+        <div class="case-head">
+          <div class="case-logo"><img src="images/logos/openevidence.png" alt="OpenEvidence"></div>
+          <div><div class="case-num">Case 03 · Medicine · Proprietary data</div><h3 class="case-title">OpenEvidence: an ensemble of specialists</h3></div>
+        </div>
+        <p class="case-dek">The "proprietary data" reason, with a published research lineage behind it.</p>
+        <div class="case-tags"><span class="tag">Trains only on peer-reviewed literature</span><span class="tag neutral">Router plus specialised models</span></div>
+        <p>OpenEvidence's founders published in 2023 that small, highly specialised models trained on in-domain medical data could outperform much larger general models; the paper won best paper at that year's leading machine learning in healthcare conference. The product is a central router sending each physician's question to one of several sub-specialty models. Its infrastructure vendor reports a 23x latency improvement and $1.9M saved through training its own models, which are vendor numbers. The company's stated reasons for owning read like Sequoia's list: data security, per-token cost, reliability and latency, and the inability to tune a closed model for medical performance.</p>
+        <aside class="evidence">
+          <div class="evidence-head"><img src="images/logos/openevidence.png" alt=""><span class="label">Evidence and sources</span></div>
+          <ul class="evidence-list">
+            <li><a href="https://www.baseten.co/resources/customers/openevidence-baseten-training/" target="_blank" rel="noopener">Baseten case study: OpenEvidence model training <span class="ext">↗</span></a><span class="note">Vendor-reported figures.</span></li>
+            <li><a href="https://www.sequoiacap.com/podcast/training-data-daniel-nadler" target="_blank" rel="noopener">Sequoia podcast with Daniel Nadler <span class="ext">↗</span></a></li>
+          </ul>
+        </aside>
+      </article>
+
+      <article class="case" id="case-ramp">
+        <div class="case-head">
+          <div class="case-logo"><img src="images/logos/ramp.png" alt="Ramp"></div>
+          <div><div class="case-num">Case 04 · Fintech · Cost and legibility</div><h3 class="case-title">Ramp: the fintech on Sequoia's list</h3></div>
+        </div>
+        <p class="case-dek">Ramp has not shipped a foundation model. It has done the two things that sit around one: routing infrastructure and a visible research blog.</p>
+        <div class="case-tags"><span class="tag">Router: 2.75T tokens a month</span><span class="tag">Ramp Labs research blog</span><span class="tag neutral">$44B valuation, June 2026</span></div>
+        <p>Ramp's model work is infrastructure. Router, built on three years of internal routing, cut Ramp's internal LLM costs by 30% and was opened to US customers free for the rest of 2026. Ramp Labs publishes research, including PorTAL, a method for porting LoRA task adaptations to a new frozen base while keeping about 98% of the gains, which is a direct answer to the fine-tuning treadmill problem. A secondhand Bloomberg report puts Ramp alongside Harvey, Abridge and Rogo as companies moving to open weights to reduce their OpenAI and Anthropic bills. The June 2026 $750M round was pitched as funding "Ramp's AI lab for finance".</p>
+        <aside class="evidence">
+          <div class="evidence-head"><img src="images/logos/ramp.png" alt=""><span class="label">Evidence and sources</span></div>
+          <ul class="evidence-list">
+            <li><a href="https://labs.ramp.com/research/" target="_blank" rel="noopener">Ramp Labs research blog <span class="ext">↗</span></a></li>
+            <li><a href="https://ramp.com/leading-indicators/an-inside-look-at-ramp-labs" target="_blank" rel="noopener">An inside look at Ramp Labs <span class="ext">↗</span></a></li>
+            <li><a href="https://www.gic.com.sg/newsroom/all/ramp-raises-series-f-at-44-billion-valuation/" target="_blank" rel="noopener">Ramp raises $750M at $44B <span class="ext">↗</span></a></li>
+          </ul>
+        </aside>
+      </article>
+    </section>
+
+    <section id="fintech">
+      <div class="section-anchor"><span class="section-num">§ 5</span><span class="section-divider"></span></div>
+      <h2>Fintech is already there, under a <em>different name.</em></h2>
+      <p class="intro-p">Payments companies did not wait for Sequoia. Since May 2025 the sector has produced a wave of "transaction foundation models": transformers trained on billions of payment events to replace hundreds of siloed fraud, credit and recommendation models with one learned representation of how money moves.</p>
+      <p>This is sovereign AI by Huang's own definition, owned down to the weights, on the most proprietary data a company has, for the cost, latency and performance reasons she lists. It just is not language models and nobody calls it sovereign AI.</p>
+
+      <div class="table-wrap">
+      <table class="grid break-out">
+        <thead><tr><th>Company</th><th>Model</th><th>Trained on</th><th>What it replaced or does</th><th>Reported result</th></tr></thead>
+        <tbody>
+          <tr><td><img src="images/logos/stripe.png" alt="">Stripe</td><td>Payments foundation model (May 2025)</td><td>Tens of billions of transactions, self-supervised</td><td>Task-specific fraud models</td><td>Card-testing detection on large businesses up 64%, company-reported</td></tr>
+          <tr><td><img src="images/logos/revolut.png" alt="">Revolut</td><td>PRAGMA (arXiv, Apr 2026)</td><td>24 to 40 billion events, 25M users, 111 countries</td><td>Siloed fraud, credit, engagement and recommendation systems</td><td>One shared behavioural layer; built with Nvidia; 3 to 5x faster on H100</td></tr>
+          <tr><td><img src="images/logos/visa.png" alt="">Visa</td><td>TransactionGPT and TREASURE (arXiv, Nov 2025)</td><td>Up to 200M sequences from the Visa network</td><td>Consumer transaction understanding</td><td>Novel 3D-transformer; published research</td></tr>
+          <tr><td><img src="images/logos/mastercard.png" alt="">Mastercard</td><td>Large Tabular Model (Mar 2026)</td><td>Billions of anonymised transactions, target hundreds of billions</td><td>Fraud, personalisation, commerce insights</td><td>Built with Nvidia NeMo and Databricks; "outperformed standard ML in early testing"</td></tr>
+          <tr><td><img src="images/logos/nubank.png" alt="">Nubank</td><td>NuFormer</td><td>135M-customer dataset</td><td>Underwriting, support and growth decisions</td><td>Live in Brazil; 60% of contacts first handled by LLMs</td></tr>
+          <tr><td><img src="images/logos/plaid.png" alt="">Plaid</td><td>Transaction and sequential foundation models (Apr to Oct 2026)</td><td>Cross-institution cash-flow data</td><td>Credit and fraud; now powers ACH risk model Protect</td><td>Fraud-specific model released 6 Oct 2026</td></tr>
+          <tr><td><img src="images/logos/adyen.png" alt="">Adyen</td><td>Uplift (Jan 2025), foundational payments model in progress</td><td>Billions of transactions</td><td>Conversion, cost and risk rules</td><td>Up to 6% conversion uplift, 86% fewer manual risk rules across 60 pilots</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="fine">All results are company-reported. Revolut and Visa have published papers; the others are press releases and interviews.</p>
+
+      <h3>The analyst view: the model is not the moat</h3>
+      <p>Forrester's read of this wave is the most useful corrective to Sequoia's enthusiasm. Capable foundation models are commoditising and weights lose value as new bases appear. What compounds is the data and the feedback loop behind the model: repayments, defaults, chargebacks, offer acceptances, captured at near-zero cost in everyday operations and fed back in. Only a handful of firms have the scale to pre-train from scratch; most should fine-tune, enrich with their own data, and build only where proprietary data creates a real edge. Forrester's survey puts the share of financial services decision-makers planning to invest in foundation models in the next 12 months at 18%.</p>
+      <div class="pull">"Owning weights is not the same as owning intelligence. The moat is the outcome-based feedback loop only your operations can produce."<cite>Paraphrase of Forrester, "Banks are building private foundation models, but the model is not the moat", 2026</cite></div>
+
+      <h3>The cross-border peer set</h3>
+      <p>Among WorldFirst's direct competitors, the picture is thinner. Airwallex has gone furthest on positioning: Agentic Business Accounts, an AgentOS for developers, treasury, spend and AP agents, and a claim that its in-house machine learning in the acquiring network lifts authorisation rates, all on infrastructure it says it owns rather than rents. It raised $320M at $11B in 2026 on an "AI runs your finance team" pitch. Wise and Payoneer have no comparable public AI-model story that this scan could find, which is itself a finding: the legibility gap in cross-border payments is wide open.</p>
+
+      <aside class="evidence">
+        <div class="evidence-head"><img src="images/logos/forrester.png" alt=""><span class="label">Evidence and sources</span></div>
+        <ul class="evidence-list">
+          <li><a href="https://techcrunch.com/2025/05/07/stripe-unveils-ai-foundation-model-for-payments-reveals-deeper-partnership-with-nvidia" target="_blank" rel="noopener">TechCrunch: Stripe unveils AI foundation model for payments <span class="ext">↗</span></a></li>
+          <li><a href="https://arxiv.org/html/2604.08649v1" target="_blank" rel="noopener">PRAGMA: Revolut Foundation Model (arXiv) <span class="ext">↗</span></a></li>
+          <li><a href="https://arxiv.org/html/2511.08939v1" target="_blank" rel="noopener">TransactionGPT, Visa Research (arXiv) <span class="ext">↗</span></a></li>
+          <li><a href="https://www.pymnts.com/news/artificial-intelligence/2026/mastercard-unveils-gen-ai-model-as-insights-engine-for-commerce/" target="_blank" rel="noopener">PYMNTS: Mastercard's large tabular model <span class="ext">↗</span></a></li>
+          <li><a href="https://plaid.com/blog/foundation-models-power-plaid-intelligence-products/" target="_blank" rel="noopener">Plaid: foundation models now power Plaid intelligence products <span class="ext">↗</span></a></li>
+          <li><a href="https://www.adyen.com/knowledge-hub/the-ai-behind-uplift" target="_blank" rel="noopener">Adyen: the AI behind Uplift <span class="ext">↗</span></a></li>
+          <li><a href="https://www.forrester.com/blogs/banks-are-building-private-foundation-models-but-the-model-is-not-the-moat/" target="_blank" rel="noopener">Forrester: the model is not the moat <span class="ext">↗</span></a></li>
+          <li><a href="https://ffnews.com/news/airwallex-news-agentic-business-accounts-and-the-agentic-banking-era-78525f9a" target="_blank" rel="noopener">Airwallex: Agentic Business Accounts <span class="ext">↗</span></a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section id="ant">
+      <div class="section-anchor"><span class="section-num">§ 6</span><span class="section-divider"></span></div>
+      <h2>Ant International's position: sovereign <em>by inheritance.</em></h2>
+      <p class="intro-p">WorldFirst does not need to decide whether to own its intelligence. Its parent already does, at every layer Sequoia describes, and the September 2026 launch put WorldFirst products on top of it. The gap is not capability. It is that almost none of this is told in WorldFirst's voice.</p>
+
+      <h3>Layer 1: open-weight base models</h3>
+      <p>Ant Group's inclusionAI team runs three open-weight families, Ling for language, Ring for reasoning and Ming for multimodal, with trillion-parameter flagships released under MIT in February and April 2026 and a finance-tuned Ling-3.0-flash-Fin in September. This is the "solid open core" in Huang's decentralised future, and it is in-house.</p>
+
+      <h3>Layer 2: proprietary domain models</h3>
+      <div class="cards">
+        <div class="card wf"><span class="c-num">Antom 3-in-1 Transformer</span><h5>Payment foundation model</h5><p>10B+ parameters, about 90T of data a year, handling sequential, tabular and graph data at once. Directly comparable to Stripe's, Visa's and Mastercard's models, and larger than most of them by disclosed size.</p></div>
+        <div class="card wf"><span class="c-num">FalconTST</span><h5>FX and liquidity forecasting</h5><p>Time-series transformer, 8.5B+ parameters in the 2026 release. Over 90% forecasting accuracy, FX hedging and allocation costs 30 to 60% lower in real cases. Open-sourced on GitHub and Hugging Face in November 2025. Standard Chartered integrated it into its SCALE liquidity platform; Barclays, Citi and Deutsche Bank are reported to use it in hedging models.</p></div>
+      </div>
+      <p class="fine">Accuracy and cost figures are Ant International's own. No independent evaluation was found.</p>
+
+      <h3>Layer 3: the AI-native stack, September 2026</h3>
+      <p>On 18 September 2026 at the VOYAGE merchant event in Shanghai and Singapore, Ant International announced close to 100 AI-native products across Alipay+, Antom, WorldFirst and Bettr, built around those two models, with five autopilot workstreams managed through natural language. The WorldFirst pieces:</p>
+      <ul class="clean-list">
+        <li><strong>Wyn</strong>A natural-language agent that runs SME account workflows. A merchant can open an account and apply for a World Card in 17 currencies with a single command.</li>
+        <li><strong>WorldFirst for Enterprise</strong>AI onboarding (eKYC and KYB), payment administration, fraud defence, chargeback control, FX and treasury tools.</li>
+        <li><strong>Account for Agent</strong>Described as the world's first agentic business account, built on KYA-enabled smart contracts, so an AI agent can hold and move money within limits the business sets.</li>
+        <li><strong>Treasury Autopilot</strong>World Map, Falcon Forecast, Falcon FX, Whale Pooling and World Payout. Falcon in the product name is the FalconTST model.</li>
+        <li><strong>Trust layer</strong>Know-Your-Agent built on the Alipay+ Agentic Mobile Protocol, with Mastercard and Visa collaborating on interoperability, and AgentSafePay offering a 100% fund guarantee against agent-specific losses.</li>
+      </ul>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-num">89.5<span class="unit">%</span></div><div class="stat-lbl">Antom merchants that deployed AI agents or FinAI solutions in the past 12 months</div></div>
+        <div class="stat"><div class="stat-num">81.4<span class="unit">%</span></div><div class="stat-lbl">Payment tasks that were AI-aided</div></div>
+        <div class="stat"><div class="stat-num">87<span class="unit">%</span></div><div class="stat-lbl">Chargeback-rate reduction for LLM clients of the subscription service</div></div>
+        <div class="stat"><div class="stat-num">~100</div><div class="stat-lbl">AI-native products announced across four pillars, rolling out through autumn and winter 2026</div></div>
+      </div>
+
+      <div class="callout dark"><span class="callout-label">The read</span><p>Measured against Sequoia's stack, Ant International owns the base models, the domain models, the context (150M+ merchants, 2B+ consumer accounts, 25M+ daily transactions) and the production feedback loop. That is more sovereign than Harvey, Cursor or Ramp. The one layer where WorldFirst is visibly weak is Sequoia's step 3: legibility.</p></div>
+
+      <aside class="evidence">
+        <div class="evidence-head"><img src="images/logos/ant-intl.png" alt=""><span class="label">Evidence and sources</span></div>
+        <ul class="evidence-list">
+          <li><a href="https://en.prnasia.com/releases/apac/ant-international-launches-industry-s-first-full-stack-ai-native-solutions-for-payment-account-fx-treasury-and-growth-operations-for-global-businesses-548466.shtml" target="_blank" rel="noopener">Ant International launches full-stack AI-native solutions, 18 Sep 2026 <span class="ext">↗</span></a><span class="note">Primary release; all metrics in this section come from it.</span></li>
+          <li><a href="https://technode.com/2025/11/12/ant-international-open-sources-ai-forecasting-model/" target="_blank" rel="noopener">TechNode: Ant International open-sources Falcon TST <span class="ext">↗</span></a></li>
+          <li><a href="https://www.theasianbanker.com/press-releases/standard-chartered-and-ant-international-launch-ai-powered-treasury-and-fx-solution" target="_blank" rel="noopener">Standard Chartered and Ant International AI treasury and FX solution <span class="ext">↗</span></a></li>
+          <li><a href="https://fintech.global/2026/09/18/ant-international-hands-payment-control-to-ai-agents/" target="_blank" rel="noopener">Fintech Global: Ant International hands payment control to AI agents <span class="ext">↗</span></a></li>
+          <li><a href="https://www.aibase.com/news/27637" target="_blank" rel="noopener">Ant Group open-sources Ling-2.6-1T <span class="ext">↗</span></a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section id="worldfirst">
+      <div class="section-anchor"><span class="section-num">§ 7</span><span class="section-divider"></span></div>
+      <h2>Applying it to WorldFirst: the <em>own-versus-rent map.</em></h2>
+      <p class="intro-p">Run WorldFirst's workloads through Sequoia's four factors and a clear pattern falls out. Everything that touches money, risk or FX should run on owned intelligence, and already can. Everything that touches language and general reasoning should rent the frontier and own the context around it.</p>
+
+      <div class="table-wrap">
+      <table class="grid break-out">
+        <thead><tr><th>WorldFirst workload</th><th>Cost at scale</th><th>Latency</th><th>Own-data edge</th><th>Verdict</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>FX pricing, hedging, cash-flow forecast</td><td>High</td><td>Hours to minutes</td><td>Very high</td><td><span class="pill own">Own</span></td><td><span class="pill have">FalconTST, Falcon Forecast / FX</span></td></tr>
+          <tr><td>Fraud, chargeback, transaction risk</td><td>High</td><td>Real time, P0</td><td>Very high</td><td><span class="pill own">Own</span></td><td><span class="pill have">Antom 3-in-1 Transformer</span></td></tr>
+          <tr><td>eKYC, KYB, onboarding decisions</td><td>Medium</td><td>Minutes</td><td>High</td><td><span class="pill own">Own</span></td><td><span class="pill have">WorldFirst for Enterprise</span></td></tr>
+          <tr><td>Payment routing and settlement</td><td>High</td><td>P0</td><td>Very high</td><td><span class="pill own">Own</span></td><td><span class="pill have">WhaleRTP, Whale Pooling</span></td></tr>
+          <tr><td>Wyn conversational agent</td><td>Medium, grows with adoption</td><td>Seconds</td><td>Medium (workflow context)</td><td><span class="pill hybrid">Hybrid</span></td><td>Rent frontier model, own harness, context and evals; distil if volume justifies</td></tr>
+          <tr><td>Customer support and dispute copy</td><td>Low to medium</td><td>Seconds</td><td>Low</td><td><span class="pill rent">Rent</span></td><td>Frontier API behind a harness</td></tr>
+          <tr><td>Marketing content and research</td><td>Low</td><td>Not P0</td><td>Low</td><td><span class="pill rent">Rent</span></td><td>Frontier models and agents</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Where WorldFirst already satisfies the thesis</h3>
+      <p>Four of the seven workloads sit on models Ant International owns down to the weights, trained on data no competitor has. That is the "proprietary data" and "performance" case, settled. The Forrester moat, outcome-based feedback loops, exists by construction: every settled payment, every chargeback outcome, every hedged exposure is a label.</p>
+
+      <h3>Where the playbook still applies</h3>
+      <ol class="steps">
+        <li><strong>An eval for cross-border SME work.</strong><p>Harvey's LAB is the model. WorldFirst could define a benchmark of real tasks an SME importer, exporter or marketplace seller needs done: open a multi-currency account, reconcile a marketplace payout, decide when to convert, pay a supplier in a new corridor, handle a chargeback. Graded against expert rubrics. It would measure Wyn, measure competitors' agents, and become the most credible content asset in the category.</p></li>
+        <li><strong>Context sovereignty for Wyn.</strong><p>The weights of a general assistant are not where WorldFirst's edge lies. The edge is the context: account state, corridor rules, FX forecasts from Falcon, each merchant's history. Nadella's "pay twice" warning applies here. The harness that feeds a rented frontier model should keep the proprietary context and the human corrections in-house, and record trajectories so the development loop belongs to WorldFirst.</p></li>
+        <li><strong>A distillation trigger.</strong><p>If Wyn's call volume makes inference a visible COGS line, the Sequoia and Cursor precedent is to distil the proven behaviour onto an open base, likely Ling given the parent. That is a measurement decision, taken once the eval exists.</p></li>
+        <li><strong>Geopolitical awareness.</strong><p>The strongest open-weight bases in 2026 are Chinese. For a Chinese-parented fintech selling to UK, EU and US SMEs, that cuts both ways: a technical advantage in access and a narrative risk under the July 2026 Washington pressure on Chinese models. Any public story about owned intelligence should lead with data residency, KYA and the fund guarantee, not with model provenance.</p></li>
+      </ol>
+
+      <h3>Reading the fit</h3>
+      <div class="fit-rows">
+        <div class="fit-row"><span class="fl">Cost</span><div class="fb"><div class="ff" style="width:70%"></div></div><span class="fv">High</span></div>
+        <div class="fit-row"><span class="fl">Speed</span><div class="fb"><div class="ff" style="width:85%"></div></div><span class="fv">High</span></div>
+        <div class="fit-row"><span class="fl">Performance</span><div class="fb"><div class="ff" style="width:80%"></div></div><span class="fv">High</span></div>
+        <div class="fit-row"><span class="fl">Destiny and control</span><div class="fb"><div class="ff" style="width:90%"></div></div><span class="fv">Very high</span></div>
+        <div class="fit-row"><span class="fl">Legibility today</span><div class="fb"><div class="ff p" style="width:20%"></div></div><span class="fv">Low</span></div>
+      </div>
+      <div class="fit-legend"><span>How strongly each Sequoia reason applies to WorldFirst</span><span class="p">Where WorldFirst currently stands</span></div>
+      <p class="fine">Qualitative, author's judgement from the evidence above, not a measured score.</p>
+    </section>
+
+    <section id="legibility">
+      <div class="section-anchor"><span class="section-num">§ 8</span><span class="section-divider"></span></div>
+      <h2>Legibility: where the content <em>brain comes back in.</em></h2>
+      <p class="intro-p">Content is not the point of owning intelligence. It is the proof of it. Huang's step 3 says buyers choose their AI champion on visible research, and that most companies doing real work in-house are not legible about it. That describes WorldFirst almost exactly.</p>
+
+      <h3>The asymmetry</h3>
+      <p>Ant International has published more than any cross-border payments competitor: an open-sourced forecasting model with bank adopters, a 10B-parameter payment transformer, trillion-parameter open-weight LLMs. Almost all of it is told as Ant Group, Antom or Alipay+ news, in press-release register, aimed at banks and enterprise merchants. WorldFirst's SME audience in the UK, EU, US and Southeast Asia hears none of it in a form they can use. Meanwhile Airwallex, with a smaller model story, is the cross-border brand most associated with agentic finance.</p>
+
+      <h3>What legible would look like</h3>
+      <div class="cards">
+        <div class="card wf"><span class="c-num">Flagship</span><h5>A cross-border SME agent benchmark</h5><p>The Harvey move. Publish the task set and rubric, invite the category to be measured, publish results. One asset that is research, PR and sales enablement at once.</p><p class="ex">Owner: product and risk with marketing. Needs the eval from §7.</p></div>
+        <div class="card wf"><span class="c-num">Translation</span><h5>Falcon, in the WorldFirst voice</h5><p>A plain-language series on what a 30 to 60% cut in hedging cost means for an importer with a £2M book. Numbers already public, audience untouched.</p><p class="ex">Owner: marketing. Reuses released figures; needs a sign-off on claims.</p></div>
+        <div class="card"><span class="c-num">Field notes</span><h5>How Wyn learns</h5><p>Short posts on trajectories, failures turned into evals, what merchants corrected. The Ramp Labs register: honest, technical, specific.</p><p class="ex">Owner: product with a named engineer as byline.</p></div>
+        <div class="card"><span class="c-num">Annual</span><h5>State of AI in cross-border trade</h5><p>A survey-backed report using Ant's adoption numbers (89.5%, 81.4%) and WorldFirst's own merchant data as the spine. LinkedIn and webinar distribution.</p><p class="ex">Owner: marketing with data team.</p></div>
+      </div>
+
+      <h3>Three rules from the case files</h3>
+      <ul class="clean-list">
+        <li><strong>Publish the benchmark before the claim.</strong>Harvey released LAB with no leaderboard, then measured itself against it. Credibility came from the sequence.</li>
+        <li><strong>Name the base and the vendor.</strong>Cursor's silence on Kimi cost it a week of its own launch narrative. Harvey and Fireworks co-published and got two audiences.</li>
+        <li><strong>Byline a person, not a brand.</strong>Every legible lab has a face: Pereyra, Sands at Stripe, Nadler. WorldFirst's AI story has none yet.</li>
+      </ul>
+    </section>
+
+    <section id="risks">
+      <div class="section-anchor"><span class="section-num">§ 9</span><span class="section-divider"></span></div>
+      <h2>Risks and <em>counter-arguments.</em></h2>
+      <ul class="clean-list">
+        <li><strong>The model is not the moat.</strong>Forrester's point stands. Weights decay as new bases appear. Ramp's PorTAL research exists precisely because porting adaptations between bases is a recurring cost. The durable asset is the data loop, which WorldFirst has and should talk about more than the models.</li>
+        <li><strong>Owning is not cheaper per task.</strong>Harvey's Tenet costs the same per task as base Kimi K3. The win was doing twice as many tasks, not a lower bill. Cost savings come from distillation and routing, not from ownership itself.</li>
+        <li><strong>Serving is the hard part.</strong>Owning weights without the ability to serve them well is a liability. Kimi K3 needs multi-node serving at 1.5TB. For WorldFirst this argues for staying on Ant International's infrastructure rather than any brand-level model effort.</li>
+        <li><strong>Renting has its own silent costs.</strong>Closed models drift when providers update weights, and 57% of executives say swapping a core model would need a rebuild. A harness with evals is the hedge whichever way the model decision goes.</li>
+        <li><strong>The messengers have interests.</strong>Nvidia sells GPUs to anyone who self-hosts. Microsoft's neutral layer runs on Azure. Sequoia's event vendors sell the post-training stack. The thesis survives the bias, but the urgency should be discounted.</li>
+        <li><strong>Regulation.</strong>Agentic accounts moving money on a merchant's behalf will meet FCA, EU and MAS scrutiny. KYA and the fund guarantee are the right first answers and should lead any external narrative.</li>
+      </ul>
+    </section>
+
+    <section id="closing">
+      <div class="section-anchor"><span class="section-num">·</span><span class="section-divider"></span></div>
+      <h2>Closing: five <em>takeaways.</em></h2>
+      <ol class="steps">
+        <li><strong>"Own your intelligence" is a product strategy, not a content idea.</strong><p>It means owning model weights, evals and the production feedback loop. Content and thought leadership are what you publish once you have done that.</p></li>
+        <li><strong>2026 is the year it became viable for application companies.</strong><p>Open weights reached the frontier, the post-training supply chain matured, and the politics of ownership went mainstream, all between February and August.</p></li>
+        <li><strong>Fintech got there first, under the name "transaction foundation models".</strong><p>Stripe, Revolut, Visa, Mastercard, Nubank and Plaid all own models trained on their own transaction data. The analyst consensus is that the data loop, not the model, is the moat.</p></li>
+        <li><strong>WorldFirst is sovereign by inheritance.</strong><p>Ant International owns the base models, the domain models, the context and the feedback loop, and put WorldFirst products on them in September 2026. The own-versus-rent decision is largely made.</p></li>
+        <li><strong>The open gap is legibility.</strong><p>The research exists; the WorldFirst-voice telling of it does not. A published cross-border SME benchmark, Falcon translated for importers, named bylines and an annual report would close more distance with buyers than any further model work.</p></li>
+      </ol>
+    </section>
+
+    <section id="sources">
+      <div class="section-anchor"><span class="section-num">·</span><span class="section-divider"></span></div>
+      <h2>Sources.</h2>
+      <div class="sources-grid">
+        <div class="sources-group">
+          <h4>Sequoia and the thesis</h4>
+          <ul>
+            <li><a href="https://sequoiacap.com/article/own-your-intelligence-a-how-to-guide" target="_blank" rel="noopener">Own Your Intelligence: A How-to Guide <span class="ext">↗</span></a></li>
+            <li><a href="https://www.youtube.com/watch?v=bMMv0bZzONg" target="_blank" rel="noopener">Sonya Huang opening remarks, YouTube <span class="ext">↗</span></a></li>
+            <li><a href="https://sequoiacap.com/podcast/own-your-intelligence-opening-remarks" target="_blank" rel="noopener">Opening remarks transcript <span class="ext">↗</span></a></li>
+            <li><a href="https://x.com/sonyatweetybird/status/2087223288649138668" target="_blank" rel="noopener">Huang on X <span class="ext">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="sources-group">
+          <h4>Why now</h4>
+          <ul>
+            <li><a href="https://www.microsoft.com/en-us/corporate-responsibility/wp-content/uploads/2026/07/open-weight-models-letter_July26.pdf" target="_blank" rel="noopener">Open-weights letter, 24 Jul 2026 <span class="ext">↗</span></a></li>
+            <li><a href="https://www.cnbc.com/2026/07/24/nvidia-microsoft-meta-open-weight-ai-models.html" target="_blank" rel="noopener">CNBC on the letter <span class="ext">↗</span></a></li>
+            <li><a href="https://www.cnbc.com/2026/08/03/palantir-karp-open-ai-anthropic-open-weight.html" target="_blank" rel="noopener">CNBC on Karp <span class="ext">↗</span></a></li>
+            <li><a href="https://www.thestateofai.com/news/nadella-warns-enterprises-pay-twice-for-ai" target="_blank" rel="noopener">Nadella "pay twice" <span class="ext">↗</span></a></li>
+            <li><a href="https://www.cio.com/article/4203027/with-ai-control-matters-more-than-capability.html" target="_blank" rel="noopener">CIO: control matters more than capability <span class="ext">↗</span></a></li>
+            <li><a href="https://www.1752.vc/learn/ai-gross-margins-and-inference-costs" target="_blank" rel="noopener">AI gross margins and inference costs <span class="ext">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="sources-group">
+          <h4>Open-weight models</h4>
+          <ul>
+            <li><a href="https://www.marktechpost.com/2026/07/18/kimi-k3-vs-deepseek-v4-pro-vs-glm-5-2-open-trillion-scale-moe-models-compared-on-benchmarks-license-and-serving-cost/" target="_blank" rel="noopener">Kimi K3 vs DeepSeek V4 Pro vs GLM-5.2 <span class="ext">↗</span></a></li>
+            <li><a href="https://www.superconductor.com/blog/kimi-k3-benchmark" target="_blank" rel="noopener">Superconductor: Kimi K3 on custom SWE-Bench <span class="ext">↗</span></a></li>
+            <li><a href="https://www.llm-releases.com/labs/ant-group" target="_blank" rel="noopener">Ant Group model releases <span class="ext">↗</span></a></li>
+            <li><a href="https://www.aibase.com/news/27637" target="_blank" rel="noopener">Ling-2.6-1T open-sourced <span class="ext">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="sources-group">
+          <h4>Case files</h4>
+          <ul>
+            <li><a href="https://www.harvey.ai/blog/post-training-update-harvey-tenet" target="_blank" rel="noopener">Harvey Tenet <span class="ext">↗</span></a></li>
+            <li><a href="https://fireworks.ai/blog/post-training-kimi-k3-with-harvey-for-long-horizon-legal-work" target="_blank" rel="noopener">Fireworks on Tenet <span class="ext">↗</span></a></li>
+            <li><a href="https://www.artificiallawyer.com/2026/05/06/harvey-launches-legal-agent-bench/" target="_blank" rel="noopener">Harvey LAB <span class="ext">↗</span></a></li>
+            <li><a href="https://venturebeat.com/technology/cursors-new-coding-model-composer-2-is-here-it-beats-claude-opus-4-6-but" target="_blank" rel="noopener">Cursor Composer 2 <span class="ext">↗</span></a></li>
+            <li><a href="https://www.baseten.co/resources/customers/openevidence-baseten-training/" target="_blank" rel="noopener">OpenEvidence training <span class="ext">↗</span></a></li>
+            <li><a href="https://labs.ramp.com/research/" target="_blank" rel="noopener">Ramp Labs research <span class="ext">↗</span></a></li>
+            <li><a href="https://ramp.com/blog/best-llm-gateways" target="_blank" rel="noopener">Ramp Router context <span class="ext">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="sources-group">
+          <h4>Fintech foundation models</h4>
+          <ul>
+            <li><a href="https://techcrunch.com/2025/05/07/stripe-unveils-ai-foundation-model-for-payments-reveals-deeper-partnership-with-nvidia" target="_blank" rel="noopener">Stripe payments foundation model <span class="ext">↗</span></a></li>
+            <li><a href="https://arxiv.org/html/2604.08649v1" target="_blank" rel="noopener">Revolut PRAGMA (arXiv) <span class="ext">↗</span></a></li>
+            <li><a href="https://www.nvidia.com/en-us/case-studies/revolut/" target="_blank" rel="noopener">Nvidia case study: Revolut <span class="ext">↗</span></a></li>
+            <li><a href="https://arxiv.org/html/2511.08939v1" target="_blank" rel="noopener">Visa TransactionGPT (arXiv) <span class="ext">↗</span></a></li>
+            <li><a href="https://www.pymnts.com/news/artificial-intelligence/2026/mastercard-unveils-gen-ai-model-as-insights-engine-for-commerce/" target="_blank" rel="noopener">Mastercard LTM <span class="ext">↗</span></a></li>
+            <li><a href="https://plaid.com/blog/foundation-models-power-plaid-intelligence-products/" target="_blank" rel="noopener">Plaid foundation models <span class="ext">↗</span></a></li>
+            <li><a href="https://www.adyen.com/knowledge-hub/the-ai-behind-uplift" target="_blank" rel="noopener">Adyen Uplift <span class="ext">↗</span></a></li>
+            <li><a href="https://www.forrester.com/blogs/banks-are-building-private-foundation-models-but-the-model-is-not-the-moat/" target="_blank" rel="noopener">Forrester: the model is not the moat <span class="ext">↗</span></a></li>
+            <li><a href="https://ffnews.com/news/airwallex-news-agentic-business-accounts-and-the-agentic-banking-era-78525f9a" target="_blank" rel="noopener">Airwallex agentic accounts <span class="ext">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="sources-group">
+          <h4>Ant International</h4>
+          <ul>
+            <li><a href="https://en.prnasia.com/releases/apac/ant-international-launches-industry-s-first-full-stack-ai-native-solutions-for-payment-account-fx-treasury-and-growth-operations-for-global-businesses-548466.shtml" target="_blank" rel="noopener">Full-stack AI-native solutions, 18 Sep 2026 <span class="ext">↗</span></a></li>
+            <li><a href="https://technode.com/2025/11/12/ant-international-open-sources-ai-forecasting-model/" target="_blank" rel="noopener">Falcon TST open-sourced <span class="ext">↗</span></a></li>
+            <li><a href="https://www.theasianbanker.com/press-releases/standard-chartered-and-ant-international-launch-ai-powered-treasury-and-fx-solution" target="_blank" rel="noopener">Standard Chartered and Falcon TST <span class="ext">↗</span></a></li>
+            <li><a href="https://fintech.global/2026/09/18/ant-international-hands-payment-control-to-ai-agents/" target="_blank" rel="noopener">Fintech Global on agentic payments <span class="ext">↗</span></a></li>
+            <li><a href="https://www.scmp.com/news/article/3313027/ant-international-rolls-out-agentic-ai-platform-pursuit-holy-grail-fintech" target="_blank" rel="noopener">SCMP: Alipay+ GenAI Cockpit, 2025 <span class="ext">↗</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="left">
+    <img src="images/wf_logo.svg" alt="WorldFirst">
+    <span>© 2026 · Internal research · Not for external distribution</span>
+  </div>
+  <div class="right"><a href="#top">Back to top ↑</a></div>
+</footer>
+
+<script>
+(function() {
+  const progressBar = document.getElementById('progress-bar');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+  const navLinks = document.querySelectorAll('.site-nav a');
+  const sections = document.querySelectorAll('section[id], article[id]');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (window.scrollY / max) * 100;
+    progressBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+  const navMap = { 'case-harvey': 'cases', 'case-cursor': 'cases', 'case-openevidence': 'cases', 'case-ramp': 'cases' };
+  function updateActive() {
+    const scrollPos = window.scrollY + 120;
+    let activeId = null;
+    sections.forEach(sec => { if (sec.offsetTop <= scrollPos) activeId = sec.id; });
+    const navActiveId = navMap[activeId] || activeId;
+    const tocActiveId = navMap[activeId] || activeId;
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href').slice(1) === navActiveId));
+    tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href').slice(1) === tocActiveId));
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+})();
+</script>
+</body>
+</html>
